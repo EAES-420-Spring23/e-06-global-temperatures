@@ -1,0 +1,95 @@
+---
+title: "World Meteorological Data"
+author: "Gavin McNicol"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+## Introduction
+
+Let's practice the following `dplyr` functions to:
+
+1.  select columns
+2.  join data, creating a wide dataset
+3.  try to plot wide data
+4.  pivot data, to make it long
+5.  try to plot long data
+
+### Packages
+
+We will use the R `dplyr` package contained in the **tidyverse** library for data wrangling and `ggplot2` for data visualization (also in **tidyverse**)
+
+```{r load-packages, warning=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+### Data
+
+The data we're using originally came from the [World Meteorological Organization](https://worldweather.wmo.int/en/home.html).
+
+The data comes in separate `.csv` files called `wmo_[city-name].csv` and has already been added to this exercise `/data` folder.
+It contains maximum monthly temperatures in degrees Fahrenheit from long-term climate averages.
+
+The code chunk below will read the different data sets in as objects.
+Check your environment pane to make sure they loaded into your RStudio session after you run the chunk.
+
+```{r message = F}
+csv_files <- list.files("data/", pattern = ".csv")
+data_list <- lapply(paste0("data/",csv_files), read_csv) 
+
+wmo_chicago <- as_tibble(data_list[[1]])
+wmo_dhaka <- as_tibble(data_list[[2]])
+wmo_fairbanks <- as_tibble(data_list[[3]])
+wmo_gabarone <- as_tibble(data_list[[4]])
+wmo_kiev <- as_tibble(data_list[[5]])
+wmo_perth <- as_tibble(data_list[[6]])
+wmo_rio_de_janeiro <- as_tibble(data_list[[7]])
+wmo_seoul <- as_tibble(data_list[[8]])
+```
+
+Take a look at the objects.
+Do they share any common columns we could use to join them?
+
+## Joining
+
+```{r single-left-join}
+# write some code here to join the first two datasets using a left_join()
+# then add the assign operator to create a new object called "all_data" or similar
+# write a code pipeline here to join all the datasets together
+```
+
+## Repeated joins
+
+We want to join all the datasets together, not just two.
+
+```{r join-pipeline}
+# write a code pipeline here to join all the datasets together
+```
+
+## Plotting wide data
+
+Let's try plotting some of these monthly temperature time series
+
+```{r ggplot-wide}
+## try writing code to plot two or more of the cities
+```
+
+You should notice that it's not easy to visualize the temperatures of multiple cities Think about why that is.
+
+## Pivot longer
+
+```{r pivot-longer}
+## write some code to pivot the dataset long, and save it as a new object "data_long"
+```
+
+## Plotting long data
+
+Now try plotting all the cities at once.
+Is this easier?
+
+```{r}
+# write ggplot code here, think about how to distinguish the different cities with aesthetic mappings
+```
